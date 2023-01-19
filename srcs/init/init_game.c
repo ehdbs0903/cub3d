@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 19:48:22 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/19 21:14:34 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/19 21:02:32 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	init_game(int ac, char *av[], t_game *game)
 	game->player.y = 0;
 	game->player.dir = 0;
 	check_file(ac, av, game);
-
-// 주석 풀면 leak남
-//	game->mlx = mlx_init();
-//	game->win = mlx_new_window(game->mlx, 1920, 1080, "cub3d");
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, 1920, 1080, "cub3d");
 }

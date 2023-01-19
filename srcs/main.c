@@ -42,17 +42,16 @@ int	main(int ac, char *av[])
 
 	printf("\n\n-------------------------------\n\n\n");
 // 주석 풀면 map뒤에 쓰레기값 들어가면서 map error남
-//	mlx_hook(game.win, 17, 0, x_exit, &game);
-//	mlx_hook(game.win, 2, 0, key_press, &game);
-//	mlx_loop(game.mlx);
+	mlx_hook(game.win, 17, 0, x_exit, &game);
+	mlx_hook(game.win, 2, 0, key_press, &game);
+	mlx_loop(game.mlx);
 	
 	free_2d_array(game.map);
 	free(game.no_path);
 	free(game.so_path);
 	free(game.we_path);
 	free(game.ea_path);
-	free(game.win);
-	free(game.mlx);
+	mlx_destroy_window(game.mlx, game.win);
 
 	return (0);
 }

@@ -43,7 +43,7 @@ void	move(t_game *game, int dx, int dy)
 		game->player.x += dx;
 		game->player.y += dy;
 	}
-	printf("x y : %d %d\n");
+	printf("x y : %d %d\n", game->player.x, game->player.y);
 }
 
 int	x_exit(int n)
