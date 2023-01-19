@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:52:43 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/18 14:08:59 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/19 21:13:50 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,56 @@ void	read_map(char **temp, t_game *game)
 	len = ft_strlen_2d(temp) - 6;
 	game->map = (char **)malloc(sizeof(char *) * (len + 1));
 	while (temp[i])
-		game->map[j++] = ft_strdup(temp[i++]);
+	{
+		game->map[j] = ft_strdup(temp[i++]);
+		j++;
+	}
 	game->map[j] = NULL;
-//
-	print_2d(game->map);
-//
-	check_map(game->map);
+	check_map(game->map, game);
 }
 
-void	check_map(char **map)
+void	check_map(char **temp, t_game *game)
 {
-	int	x;
-	int	y;
-	int k;
+	int	i;
+	int	j;
 
-	x = 0;
-	while (map[x])
+	i = -1;
+	while (temp[++i])
 	{
-		y = 0;
-		while (map[x][y])
+		j = -1;
+		while (temp[i][++j])
 		{
-			if (map[x][y] != '1' && map[x][y] != ' ')
-				check_around(map, x, y);
-			y++;
+			if (temp[i][j] == '0')
+			{
+				if (i == 0 || j == 0)
+					error_exit(3);
+				else if (!temp[i + 1][j] || !temp[i][j + 1])
+					error_exit(3);
+				else if (temp[i][j - 1] == ' ' || temp[i][j + 1] == ' ')
+					error_exit(3);
+				else if (temp[i + 1][j] == ' ' || temp[i - 1][j] == ' ')
+					error_exit(3);
+			}
+			else if (temp[i][j] != ' ' && temp[i][j] != '1')
+				init_player(temp[i][j], j, i, game);
 		}
-		x++;
 	}
 }
 
-void	check_around(char **map, int x, int y)
+void	init_player(char c, int x, int y, t_game *game)
 {
-	int	dx[4] = {-1, 1, 0, 0};
-	int	dy[4] = {0, 0, -1, 1};
-	int nx;
-	int	ny;
-	int	k;
-
-	k = 0;
-	while (k < 4)
+	if (game->p_flag)
+		error_exit(3);
+	else
 	{
-		nx = x + dx[k];
-		ny = y + dy[k];
-		if (nx > 0 && nx <)
+		game->p_flag = 1;
+		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		{
+			game->player.dir = c;
+			game->player.x = x;
+			game->player.y = y;
+		}
+		else
+			error_exit(3);
 	}
 }

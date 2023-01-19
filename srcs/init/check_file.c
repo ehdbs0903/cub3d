@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:19:27 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/18 14:09:01 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/19 19:18:03 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_file(int ac, char **av, t_game *game)
 	if (fd == -1)
 		error_exit(1);
 	read(fd, buff, 1024);
-	check_element(buff, game);
+	init_element(buff, game);
 	close(fd);
 }
 
@@ -41,20 +41,4 @@ void	check_argument(int ac, char **av)
 		error_exit(1);
 	if (!ft_strnstr(av[1] + i, ".cub\0", 5))
 		error_exit(1);
-}
-
-void	check_element(char *buff, t_game *game)
-{
-	char	**temp;
-	int		i;
-
-	temp = ft_split(buff, '\n');
-	i = 0;
-	while (temp[i])
-	{
-		printf("%d : %s\n", i, temp[i]);
-		i++;
-	}
-	read_map(temp, game);
-	free_2d_array(temp);
 }

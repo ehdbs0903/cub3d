@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 19:48:22 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/18 13:23:34 by doykim           ###   ########.fr       */
+/*   Created: 2023/01/18 16:02:47 by doykim            #+#    #+#             */
+/*   Updated: 2023/01/19 15:00:05 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void init_game(t_game *game)
+int	ft_isspace(int c)
 {
-	game->mlx = mlx_init();
-	game->width = 0;
-	game->height = 0;
-	game->p_cnt = 0;
-	game->map = NULL;
+	c = (unsigned char)c;
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+		|| c == ' ')
+		return (1);
+	return (0);
 }
