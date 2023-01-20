@@ -1,10 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/20 14:51:48 by sanghan           #+#    #+#              #
+#    Updated: 2023/01/20 14:55:33 by sanghan          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3d
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 INCLUDES_DIR = includes
-LIBS_DIR = libs
+LIBS_DIR = ./libft
 SRCS_DIR = srcs
 MLX_DIR	= mlx
 
@@ -17,7 +29,6 @@ INIT_SRCS = init_game.c check_file.c init_element.c read_map.c
 UTILS_SRCS = error_exit.c free.c print.c
 KEY_SRCS = key_press.c
 
-LIBFT_DIR = libs/libft
 LIBFT = libft.a
 LIBFT_LIB = -lft
 
@@ -31,8 +42,8 @@ OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	make -C $(LIBFT_DIR) bonus
-	$(CC) $(CFLAGS) $(OBJS) -I $(INCLUDES_DIR) -L $(LIBFT_DIR) $(LIBFT_LIB) -lmlx -framework OpenGL -framework AppKit -o $@
+	make -C $(LIBS_DIR) bonus
+	$(CC) $(CFLAGS) $(OBJS) -I $(INCLUDES_DIR) -L $(LIBS_DIR) $(LIBFT_LIB) -lmlx -framework OpenGL -framework AppKit -o $@
 	make -C $(MLX_DIR) all
 
 %.o : %.c
@@ -40,12 +51,12 @@ $(NAME) : $(OBJS)
 
 clean :
 	rm -rf $(OBJS)
-	make -C $(LIBFT_DIR) clean
+	make -C $(LIBS_DIR) clean
 	make -C $(MLX_DIR) clean
 
 fclean : clean
 	rm -rf $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	make -C $(LIBS_DIR) fclean
 	rm -rf $(MLXDIR)/libmlx.a
 
 re :
