@@ -11,8 +11,7 @@
 	* 오류사항
 		* 오류 전면 수정!~!!~!~!~!
 
-20230120
-	*진행사항
-		*libft 42헤더 // 그냥 제 libft 가져오고 isspace랑 strlen_2d는 도윤님이 작성하신 거 가져왔습니다.
-		*그에 맞는 header, makefile 수정
-		
+* 20230120
+	* 진행사항
+		* libft 42헤더 // 그냥 제 libft 가져오고 isspace랑 strlen_2d는 도윤님이 작성하신 거 가져왔습니다.
+		* 그에 맞는 header, makefile 수정
