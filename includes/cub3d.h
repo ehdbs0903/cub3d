@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/20 14:55:53 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/01/20 16:05:26 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define KEY_S		1
 # define KEY_A		0
 # define KEY_D		2
+# define KEY_LEFT	123
+# define KEY_RIGHT	124
 
 typedef struct s_player
 {
