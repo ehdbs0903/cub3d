@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:20 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/26 14:26:50 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ typedef struct	s_img
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	int		dir_x;
-	int		dir_y;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
 	char	dir;
 }	t_player;
 

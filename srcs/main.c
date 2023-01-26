@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:40:49 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:19 by doykim           ###   ########.fr       */
+/*   Updated: 2023/01/26 14:26:56 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int ac, char *av[])
 	printf("player dir : %c\n", game.player.dir);
 
 	printf("\n\n-------------------------------\n\n\n");
+	
 
 	mlx_hook(game.win, 17, 0, x_exit, &game);
 	mlx_hook(game.win, 2, 0, key_press, &game);
