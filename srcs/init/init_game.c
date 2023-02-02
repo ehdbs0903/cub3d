@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 19:48:22 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/26 16:28:34 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:14 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	init_game(int ac, char *av[], t_game *game)
 	game->ea_path = NULL;
 	game->floor = NULL;
 	game->ceil = NULL;
+	game->movespeed = 0.01;
+	game->rotspeed = 0.01;
 	game->plane_x = 0;
 	game->plane_y = 0;
 	game->player.x = 0;

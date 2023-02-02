@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/26 17:46:25 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:10 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct s_game
 	char		*ea_path;
 	void		*floor;
 	void		*ceil;
+	float		movespeed;
+	float		rotspeed;
 	t_player	player;
 	t_img	img;
 	t_img	img_no;
@@ -100,7 +102,7 @@ void	init_dir(char dir, t_game *game);
 int		main_loop(t_game *game);
 
 //key
-//int		key_press(int keycode, t_game *game);
+int		key_press(int key, t_game *game);
 //void	move(t_game *game, int dx, int dy);
 int		x_exit(int n);
 
@@ -109,5 +111,5 @@ void	error_exit(int n);
 void	free_2d_array(char **str);
 void	print_2d(char **arr);
 
-void raycasting(t_game *game);
+int		raycasting(t_game *game);
 #endif
