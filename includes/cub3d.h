@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/02 20:17:10 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/04 16:06:26 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
+typedef struct s_ray
+{
+
+
+}	t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -63,24 +69,27 @@ typedef struct s_game
 	double		plane_x;
 	double		plane_y;
 	char		**map;
+	int			map_width;
+	int			map_height;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
 	void		*floor;
 	void		*ceil;
-	float		movespeed;
-	float		rotspeed;
+	double		movespeed;
+	double		rotspeed;
 	t_player	player;
-	t_img	img;
-	t_img	img_no;
-	t_img	img_so;
-	t_img	img_we;
-	t_img	img_ea;
+	t_ray		*ray;
+	t_img		*img;
+	t_img		img_no;
+	t_img		img_so;
+	t_img		img_we;
+	t_img		img_ea;
 }	t_game;
 
 //init
-void	init_game(int ac, char *av[], t_game *game);
+void	init_game(int ac, char *av[], t_game *game, t_img *img);
 
 void	check_file(int ac, char **av, t_game *game);
 void	check_argument(int ac, char **av);
@@ -99,7 +108,7 @@ void	init_player(char c, int x, int y, t_game *game);
 void	init_dir(char dir, t_game *game);
 
 //loop
-int		main_loop(t_game *game);
+void	main_loop(t_game *game);
 
 //key
 int		key_press(int key, t_game *game);

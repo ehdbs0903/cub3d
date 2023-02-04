@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:40:49 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/02 20:17:09 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/04 16:38:18 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	check_leak(void)
 int	main(int ac, char *av[])
 {
 	t_game	game;
+	t_img	img;
 
 //	atexit(check_leak);
-	init_game(ac, av, &game);
+
+	init_game(ac, av, &game, &img);
 
 	printf("\n\n"); ///구조체 변수 체크
 
@@ -38,9 +40,10 @@ int	main(int ac, char *av[])
 
 	printf("\n\n-------------------------------\n\n\n");
 
+	main_loop(&game);
 	mlx_hook(game.win, 2, 0, key_press, &game);
 //	mlx_hook(game.win, 3, 0, key_release, &game);
-	mlx_loop_hook(game.mlx, &main_loop, &game);
+//	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_loop(game.mlx);
 
 	free_2d_array(game.map);

@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:39:00 by sanghan           #+#    #+#             */
-/*   Updated: 2023/02/02 20:17:17 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/04 16:42:49 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ int raycasting(t_game *game)
             {
                 sideDistY += deltaDistY;
                 mapY += stepY;
-                side = 1;  
+                side = 1;
 			}
 			////////////////////////////////
-            if (game->map[mapX][mapY] == '1')
+            if (game->map[mapY][mapX] == '1')
                 hit = 1;
         }
         if (side == 0)
@@ -96,7 +96,7 @@ int raycasting(t_game *game)
         else
             perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirectionY;
         int lineHeight = (int)(HEIGHT / perpWallDist);
-        
+
 		int drawStart = (-lineHeight / 2) + (HEIGHT / 2);
         if (drawStart < 0)
             drawStart = 0;
@@ -105,7 +105,7 @@ int raycasting(t_game *game)
             drawEnd = HEIGHT - 1;
 
         int color;
-        if (game->map[mapX][mapY] == '1')
+        if (game->map[mapY][mapX] == '1')
             color = 0xFFFFFF;
 
         if (side == 1)
