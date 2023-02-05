@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:43:27 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/04 16:52:23 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:04:33 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ void	main_loop(t_game *game)
 	raycasting(game);
 //	paint_img(game);
 //	key_hook(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img->img, 0, 0);
+//	mlx_put_image_to_window(game->mlx, game->win, game->img->img, 0, 0);
 }
-

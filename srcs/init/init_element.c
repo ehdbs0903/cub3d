@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 16:39:01 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:12 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/05 16:42:25 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,28 @@ void	init_element(char *buff, t_game *game)
 void	init_texture(t_game *game, char *line)
 {
 	char	*tmp;
+	int		width;
+	int		height;
 
 	if (line[0] == 'N')
 	{
 		if (check_texture(line, &tmp))
-			game->no_path = tmp;
+			game->no_path = mlx_xpm_file_to_image(game->mlx, "../textures/NO.xpm", &width, &height);
 	}
 	else if (line[0] == 'S')
 	{
 		if (check_texture(line, &tmp))
-			game->so_path = tmp;
+			game->so_path = mlx_xpm_file_to_image(game->mlx, "../textures/SO.xpm", &width, &height);
 	}
 	else if (line[0] == 'W')
 	{
 		if (check_texture(line, &tmp))
-			game->we_path = tmp;
+			game->ea_path = mlx_xpm_file_to_image(game->mlx, "../textures/EA.xpm", &width, &height);
 	}
 	else if (line[0] == 'E')
 	{
 		if (check_texture(line, &tmp))
-			game->ea_path = tmp;
+			game->we_path = mlx_xpm_file_to_image(game->mlx, "../textures/WE.xpm", &width, &height);
 	}
 }
 

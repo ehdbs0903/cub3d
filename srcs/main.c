@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:40:49 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/04 16:38:18 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:52:28 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ int	main(int ac, char *av[])
 	printf("\n\n"); ///구조체 변수 체크
 
 	print_2d(game.map);
-
-	printf("\nno_path : %s\n", game.no_path);
-	printf("so_path : %s\n", game.so_path);
-	printf("we_path : %s\n", game.we_path);
-	printf("ea_path : %s\n", game.so_path);
 
 	printf("\nplayer pos : %f, %f\n", game.player.x, game.player.y);
 	printf("player dir : %f, %f\n", game.player.dir_x, game.player.dir_y);

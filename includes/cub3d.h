@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/04 16:06:26 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:57:41 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 # define WIDTH		1920
 # define HEIGHT		1080
+# define TWIDTH		64
+# define THEIGHT	64
 
 typedef struct	s_img
 {
@@ -81,7 +83,6 @@ typedef struct s_game
 	double		rotspeed;
 	t_player	player;
 	t_ray		*ray;
-	t_img		*img;
 	t_img		img_no;
 	t_img		img_so;
 	t_img		img_we;
