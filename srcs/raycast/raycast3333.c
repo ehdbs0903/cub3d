@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 19:48:22 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/05 20:13:20 by sanghan          ###   ########.fr       */
+/*   Created: 2023/01/25 19:43:27 by doykim            #+#    #+#             */
+/*   Updated: 2023/02/05 19:37:02 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_game(int ac, char *av[], t_game *game, t_img *img)
+void	verline (t_game *game, int x, int y1, int y2, int color)
 {
-	ft_memset(game, 0, sizeof(t_game));
-	ft_memset(img, 0, sizeof(t_img));
-	game->movespeed = 0.01;
-	game->rotspeed = 0.2;
-	game->mlx = mlx_init();
-	check_file(ac, av, game);
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3d");
+
 }

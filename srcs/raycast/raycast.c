@@ -6,12 +6,11 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:39:00 by sanghan           #+#    #+#             */
-/*   Updated: 2023/02/04 16:42:49 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/05 19:35:09 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 void verLine (t_game *game, int x, int y1, int y2, int color)
 {
     int temp;
