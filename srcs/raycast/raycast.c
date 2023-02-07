@@ -25,6 +25,13 @@ void verLine (t_game *game, int x, int y1, int y2, int color)
 
 int raycasting(t_game *game)
 {
+    game->image->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+    if (game->image->img == NULL)
+        exit(1);
+    game->image->data = (int *)mlx_get_data_addr(game->image->img, &(game->image->bpp), \
+        &(game->image->line_len), &(game->image->endian));
+
+    
     int x;
 
     x = 0;
@@ -94,6 +101,40 @@ int raycasting(t_game *game)
             perpWallDist = (mapX - game->player.x + (1 - stepX) / 2) / rayDirectionX;
         else
             perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirectionY;
+
+
+
+        //
+        t_img	texture_img;
+        int textureX;
+        int textureY;
+
+        if (side == 1 && stepY < 0)
+            texture_img = game->img_no;
+        else if (side == 1)
+            texture_img = game->img_so;
+        else if (stepX > 0)
+            texture_img = game->img_ea;
+        else
+            texture_img = game->img_we;
+
+
+        //calc line
+        double wallX;
+
+        if (side == 0)
+            wallX = game->player.y + perpWallDist * rayDirectionY;
+        else
+            wallX = game->player.x + perpWallDist * rayDirectionX;
+        wallX -= floor(wallX);
+        textureX = (int)(wallX * (double)texture_img.line_len / 4);
+        if (side == 0 && rayDirectionX < 0)
+            textureX = texture_img.line_len / 4 - textureX - 1;
+        if (side == 1 && rayDirectionY > 0)
+            textureX = texture_img.line_len / 4 - textureX - 1;
+
+        //
+
         int lineHeight = (int)(HEIGHT / perpWallDist);
 
 		int drawStart = (-lineHeight / 2) + (HEIGHT / 2);
@@ -103,6 +144,30 @@ int raycasting(t_game *game)
         if (drawEnd >= HEIGHT)
             drawEnd = HEIGHT - 1;
 
+        double step;
+        double texture_pos;
+        step = (double)texture_img.line_len / 4 / lineHeight;
+        texture_pos = (drawStart - HEIGHT / 2 + \
+		lineHeight / 2) * step;
+
+
+        int	y;
+        int	pixel;
+
+        y = drawStart;
+        while (y < drawEnd)
+        {
+            pixel = (y * game->image->line_len / 4) + x;
+            textureY = (int)texture_pos \
+                & (texture_img.line_len / 4 - 1);
+            game->image->data[pixel] = \
+                texture_img.data[textureY * texture_img.line_len / 4 + \
+                textureX];
+            texture_pos += step;
+            y++;
+        }
+
+        /*
         int color;
         if (game->map[mapY][mapX] == '1')
             color = 0xFFFFFF;
@@ -111,7 +176,9 @@ int raycasting(t_game *game)
             color = color / 2;
 
         verLine(game, x, drawStart, drawEnd, color);
+        */
         x++;
     }
+    mlx_put_image_to_window(game->mlx, game->win, game->image->img, 0, 0);
 	return(0);
 }

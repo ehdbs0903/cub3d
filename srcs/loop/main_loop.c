@@ -14,8 +14,8 @@
 
 void	main_loop(t_game *game)
 {
-	mlx_put_image_to_window(game->mlx, game->win, game->ceil, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->win, game->floor, 0, 540);
+//	mlx_put_image_to_window(game->mlx, game->win, game->ceil, 0, 0);
+//	mlx_put_image_to_window(game->mlx, game->win, game->floor, 0, 540);
 //	set_background(game);
 	raycasting(game);
 //	paint_img(game);

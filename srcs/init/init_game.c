@@ -16,8 +16,9 @@ void	init_game(int ac, char *av[], t_game *game, t_img *img)
 {
 	ft_memset(game, 0, sizeof(t_game));
 	ft_memset(img, 0, sizeof(t_img));
-	game->movespeed = 0.01;
-	game->rotspeed = 0.2;
+	game->image = img;
+	game->movespeed = 0.1;
+	game->rotspeed = 0.05;
 	game->mlx = mlx_init();
 	check_file(ac, av, game);
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3d");

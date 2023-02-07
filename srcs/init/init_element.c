@@ -12,6 +12,39 @@
 
 #include "cub3d.h"
 
+static void	xpm_file_to_image_texture(t_game *game)
+{
+	int	w;
+	int	h;
+
+	game->img_no.img = mlx_xpm_file_to_image(game->mlx, \
+		game->no_path, &w, &h);
+	game->img_so.img = mlx_xpm_file_to_image(game->mlx, \
+		game->so_path, &w, &h);
+	game->img_we.img = mlx_xpm_file_to_image(game->mlx, \
+		game->we_path, &w, &h);
+	game->img_ea.img = mlx_xpm_file_to_image(game->mlx, \
+		game->ea_path, &w, &h);
+
+		//null-guard
+}
+
+static void	get_data_addr_texture(t_game *game)
+{
+	game->img_no.data = (int *)mlx_get_data_addr(game->img_no.img, \
+		&(game->img_no.bpp), \
+		&(game->img_no.line_len), &(game->img_no.endian));
+	game->img_so.data = (int *)mlx_get_data_addr(game->img_so.img, \
+		&(game->img_so.bpp), \
+		&(game->img_so.line_len), &(game->img_so.endian));
+	game->img_we.data = (int *)mlx_get_data_addr(game->img_we.img, \
+		&(game->img_we.bpp), \
+		&(game->img_we.line_len), &(game->img_we.endian));
+	game->img_ea.data = (int *)mlx_get_data_addr(game->img_ea.img, \
+		&(game->img_ea.bpp), \
+		&(game->img_ea.line_len), &(game->img_ea.endian));
+}
+
 void	init_element(char *buff, t_game *game)
 {
 	char	**temp;
@@ -34,35 +67,40 @@ void	init_element(char *buff, t_game *game)
 			error_exit(2);
 		i++;
 	}
+	xpm_file_to_image_texture(game);
+	get_data_addr_texture(game);
 	read_map(temp, game);
 	free_2d_array(temp);
 }
 
+
+
 void	init_texture(t_game *game, char *line)
 {
 	char	*tmp;
-	int		width;
-	int		height;
+	// int		width;
+	// int		height;
 
+	printf("line : %s\n", line);
 	if (line[0] == 'N')
 	{
 		if (check_texture(line, &tmp))
-			game->no_path = mlx_xpm_file_to_image(game->mlx, "../textures/NO.xpm", &width, &height);
+			game->no_path = tmp;
 	}
 	else if (line[0] == 'S')
 	{
 		if (check_texture(line, &tmp))
-			game->so_path = mlx_xpm_file_to_image(game->mlx, "../textures/SO.xpm", &width, &height);
+			game->so_path = tmp;
 	}
 	else if (line[0] == 'W')
 	{
 		if (check_texture(line, &tmp))
-			game->ea_path = mlx_xpm_file_to_image(game->mlx, "../textures/EA.xpm", &width, &height);
+			game->we_path = tmp;
 	}
 	else if (line[0] == 'E')
 	{
 		if (check_texture(line, &tmp))
-			game->we_path = mlx_xpm_file_to_image(game->mlx, "../textures/WE.xpm", &width, &height);
+			game->ea_path = tmp;
 	}
 }
 

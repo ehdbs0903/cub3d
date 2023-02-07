@@ -38,7 +38,7 @@ int	main(int ac, char *av[])
 	main_loop(&game);
 	mlx_hook(game.win, 2, 0, key_press, &game);
 //	mlx_hook(game.win, 3, 0, key_release, &game);
-//	mlx_loop_hook(game.mlx, &main_loop, &game);
+//	mlx_loop_hook(game.mlx, &main_loop, &game);∑
 	mlx_loop(game.mlx);
 
 	free_2d_array(game.map);

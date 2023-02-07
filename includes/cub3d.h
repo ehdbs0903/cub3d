@@ -65,6 +65,7 @@ typedef struct s_ray
 
 typedef struct s_game
 {
+	t_img		*image;
 	void		*mlx;
 	void		*win;
 	int			p_flag;
