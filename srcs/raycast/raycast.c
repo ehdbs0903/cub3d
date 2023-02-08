@@ -11,167 +11,141 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-void verLine (t_game *game, int x, int y1, int y2, int color)
-{
-    int temp;
-
-    temp = y1;
-	while (temp <= y2)
-    {
-        mlx_pixel_put(game->mlx, game->win, x, temp, color);
-        temp++;
-    }
-}
 
 int raycasting(t_game *game)
 {
+    t_ray   ray;
+    int x;
+
     game->image->data = (int *)mlx_get_data_addr(game->image->img, &(game->image->bpp), \
         &(game->image->line_len), &(game->image->endian));
 
     
-    int x;
 
     x = 0;
     while (x < WIDTH)
     {
-        double cameraX = (2 * x / (double)(WIDTH)) - 1;
+        ray.camera_x = (2 * x / (double)(WIDTH)) - 1;
 		
-		double rayDirectionX = game->player.dir_x + game->plane_x * cameraX;
-		double rayDirectionY = game->player.dir_y + game->plane_y * cameraX;
+		ray.ray_dir_x = game->player.dir_x + game->plane_x * ray.camera_x;
+		ray.ray_dir_y = game->player.dir_y + game->plane_y * ray.camera_x;
 		
-		int mapX = (int)(game->player.x);
-		int mapY = (int)(game->player.y);
+		ray.map_x = (int)(game->player.x);
+		ray.map_y = (int)(game->player.y);
 
-        double sideDistX;
-        double sideDistY;
-
-        double deltaDistX;
-        if (rayDirectionX != 0)
-            deltaDistX = fabs(1 / rayDirectionX);
-        double deltaDistY;
-        if (rayDirectionY != 0)
-            deltaDistY = fabs(1 / rayDirectionY);
-
-        double perpWallDist;
-
-        int stepX;
-        int stepY;
-
-        int hit = 0;
-        int side;
-
-		if (rayDirectionX < 0)
+        if (ray.ray_dir_x != 0)
+            ray.deltadist_x = fabs(1 / ray.ray_dir_x);
+        if (ray.ray_dir_y != 0)
+            ray.deltadist_y = fabs(1 / ray.ray_dir_y);
+        ray.hit = 0;
+		if (ray.ray_dir_x < 0)
         {
-            stepX = -1;
-            sideDistX = (game->player.x - mapX) * deltaDistX;
+            ray.step_x = -1;
+            ray.sidedist_x = (game->player.x - ray.map_x) * ray.deltadist_x;
         }
         else
         {
-            stepX = 1;
-            sideDistX = (mapX + 1.0 - game->player.x) * deltaDistX;
+            ray.step_x = 1;
+            ray.sidedist_x = (ray.map_x + 1.0 - game->player.x) * ray.deltadist_x;
         }
-        if (rayDirectionY < 0)
+        if (ray.ray_dir_y < 0)
         {
-            stepY = -1;
-            sideDistY = (game->player.y - mapY) * deltaDistY;
+            ray.step_y = -1;
+            ray.sidedist_y = (game->player.y - ray.map_y) * ray.deltadist_y;
         }
         else
         {
-            stepY = 1;
-            sideDistY = (mapY + 1.0 - game->player.y) * deltaDistY;
+            ray.step_y = 1;
+            ray.sidedist_y = (ray.map_y + 1.0 - game->player.y) * ray.deltadist_y;
         }
-
-        mapX = game->player.x;
-        mapY = game->player.y;
-        while (hit == 0)
+//dda
+        ray.map_x = game->player.x;
+        ray.map_y = game->player.y;
+        while (ray.hit == 0)
         {
-            if (sideDistX < sideDistY)
+            if (ray.sidedist_x < ray.sidedist_y)
             {
-                sideDistX += deltaDistX;
-                mapX += stepX;
-				side = 0;
+                ray.sidedist_x += ray.deltadist_x;
+                ray.map_x += ray.step_x;
+				ray.side = 0;
 			}
             else
             {
-                sideDistY += deltaDistY;
-                mapY += stepY;
-                side = 1;
+                ray.sidedist_y += ray.deltadist_y;
+                ray.map_y += ray.step_y;
+                ray.side = 1;
 			}
-			////////////////////////////////
-            if (game->map[mapY][mapX] == '1')
-                hit = 1;
+            if (game->map[ray.map_y][ray.map_x] == '1')
+                ray.hit = 1;
         }
-        if (side == 0)
-            perpWallDist = (mapX - game->player.x + (1 - stepX) / 2) / rayDirectionX;
+
+//calculate_perp_wall_dist
+
+        if (ray.side == 0)
+            ray.perp_wall_dist = (ray.map_x - game->player.x + (1 - ray.step_x) / 2) / ray.ray_dir_x;
         else
-            perpWallDist = (mapY - game->player.y + (1 - stepY) / 2) / rayDirectionY;
+            ray.perp_wall_dist = (ray.map_y - game->player.y + (1 - ray.step_y) / 2) / ray.ray_dir_y;
 
 
-
-        //
+// set wall
         t_img	texture_img;
-        int textureX;
-        int textureY;
 
-        if (side == 1 && stepY < 0)
+        if (ray.side == 1 && ray.step_y < 0)
             texture_img = game->img_no;
-        else if (side == 1)
+        else if (ray.side == 1)
             texture_img = game->img_so;
-        else if (stepX > 0)
+        else if (ray.step_x > 0)
             texture_img = game->img_ea;
         else
             texture_img = game->img_we;
 
 
-        //calc line
-        double wallX;
-
-        if (side == 0)
-            wallX = game->player.y + perpWallDist * rayDirectionY;
+// calculate_line
+        if (ray.side == 0)
+            ray.wall_x = game->player.y + ray.perp_wall_dist * ray.ray_dir_y;
         else
-            wallX = game->player.x + perpWallDist * rayDirectionX;
-        wallX -= floor(wallX);
-        textureX = (int)(wallX * (double)texture_img.line_len / 4);
-        if (side == 0 && rayDirectionX < 0)
-            textureX = texture_img.line_len / 4 - textureX - 1;
-        if (side == 1 && rayDirectionY > 0)
-            textureX = texture_img.line_len / 4 - textureX - 1;
+            ray.wall_x = game->player.x + ray.perp_wall_dist * ray.ray_dir_x;
+        ray.wall_x -= floor(ray.wall_x);
 
-        //
 
-        int lineHeight = (int)(HEIGHT / perpWallDist);
+        ray.texture_x = (int)(ray.wall_x * (double)texture_img.line_len / 4);
+        if (ray.side == 0 && ray.ray_dir_x < 0)
+            ray.texture_x = texture_img.line_len / 4 - ray.texture_x - 1;
+        if (ray.side == 1 && ray.ray_dir_y > 0)
+            ray.texture_x = texture_img.line_len / 4 - ray.texture_x - 1;
 
-		int drawStart = (-lineHeight / 2) + (HEIGHT / 2);
-        if (drawStart < 0)
-            drawStart = 0;
-        int drawEnd = (lineHeight / 2) + (HEIGHT / 2);
-        if (drawEnd >= HEIGHT)
-            drawEnd = HEIGHT;
 
-        double step;
-        double texture_pos;
-        step = (double)texture_img.line_len / 4 / lineHeight;
-        texture_pos = (drawStart - HEIGHT / 2 + \
-		lineHeight / 2) * step;
+
+        int lineHeight = (int)(HEIGHT / ray.perp_wall_dist);
+
+		ray.drawstart = (-lineHeight / 2) + (HEIGHT / 2);
+        if (ray.drawstart < 0)
+            ray.drawstart = 0;
+        ray.drawend = (lineHeight / 2) + (HEIGHT / 2);
+        if (ray.drawend >= HEIGHT)
+            ray.drawend = HEIGHT;
+        ray.step = (double)texture_img.line_len / 4 / lineHeight;
+        ray.texture_pos = (ray.drawstart - HEIGHT / 2 + \
+		lineHeight / 2) * ray.step;
 
 
         int	y;
         int	pixel;
-
+//draw img
         y = 0;
 		while (y < HEIGHT)
         {
             pixel = (y * game->image->line_len / 4) + x;
-			if (y < drawStart)
+			if (y < ray.drawstart)
 				game->image->data[pixel] = game->ceil;
-			else if (y < drawEnd)
+			else if (y < ray.drawend)
 			{
-            textureY = (int)texture_pos \
+            ray.texture_y = (int)ray.texture_pos \
                 & (texture_img.line_len / 4 - 1);
             game->image->data[pixel] = \
-                texture_img.data[textureY * texture_img.line_len / 4 + \
-                textureX];
-            texture_pos += step;
+                texture_img.data[ray.texture_y * texture_img.line_len / 4 + \
+                ray.texture_x];
+            ray.texture_pos += ray.step;
 			}
 			else
 				game->image->data[pixel] = game->floor;

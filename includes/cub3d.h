@@ -60,23 +60,23 @@ typedef struct s_rgb
 
 typedef struct s_ray
 {
-	double	cameraX;
+	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	int		map_x;
+	int		map_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
 	int		hit;
 	int		side;
 	double	wall_x;
-	int		drawStart;
-	int		drawEnd;
+	int		drawstart;
+	int		drawend;
 	int		texture_x;
 	int		texture_y;
 	double	step;
