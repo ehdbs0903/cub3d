@@ -96,7 +96,7 @@ void	init_game(int ac, char *av[], t_game *game, t_img *img);
 void	check_file(int ac, char **av, t_game *game);
 void	check_argument(int ac, char **av);
 
-void	init_element(char **temp, t_game *game);
+void	init_element(char *buff, t_game *game);
 void	init_texture(t_game *game, char *line);
 int		check_texture(char *line, char **tmp);
 

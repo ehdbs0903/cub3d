@@ -16,17 +16,13 @@ void	check_file(int ac, char **av, t_game *game)
 {
 	char	buff[1024];
 	int		fd;
-	char	**temp;
 
 	check_argument(ac, av);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		error_exit(1);
 	read(fd, buff, 1024);
-	temp = ft_split(buff, '\n');
-	print_2d(temp);
-	init_element(temp, game);
-	read_map(temp, game);
+	init_element(buff, game);
 	close(fd);
 }
 
