@@ -72,6 +72,8 @@ void	*make_rgb_img(t_game *game, int rgb)
 	int		j;
 
 	image.img = mlx_new_image(game->mlx, 1920, 540);
+	if (image.img == NULL)
+		exit(1);
 	image.data = (int *)mlx_get_data_addr(image.img, &image.bpp, \
 			&image.line_len, &image.endian);
 	i = 0;

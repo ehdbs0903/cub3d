@@ -25,8 +25,9 @@ static void	xpm_file_to_image_texture(t_game *game)
 		game->we_path, &w, &h);
 	game->img_ea.img = mlx_xpm_file_to_image(game->mlx, \
 		game->ea_path, &w, &h);
-
-		//null-guard
+	if (game->img_no.img == NULL || game->img_so.img == NULL \
+		|| game->img_ea.img == NULL || game->img_we.img == NULL)
+		error_exit(2);
 }
 
 static void	get_data_addr_texture(t_game *game)
@@ -47,17 +48,20 @@ static void	get_data_addr_texture(t_game *game)
 
 void	init_element(char *buff, t_game *game)
 {
+	//static int	count = 0;
 	int		len;
 	int		i;
 	char	**temp;
 
 	temp = ft_split(buff, '\n');
+	print_2d(temp);
 	len = ft_strlen_2d(temp);
 	if (len <= 6)
 		error_exit(2);
 	i = 0;
 	while (i < 6)
 	{
+		// pass_new_line(game);
 		if (!ft_strncmp("NO ", temp[i], 3) || !ft_strncmp("SO ", temp[i], 3)
 			|| !ft_strncmp("WE ", temp[i], 3) || !ft_strncmp("EA ", temp[i], 3))
 			init_texture(game, temp[i]);
@@ -67,6 +71,15 @@ void	init_element(char *buff, t_game *game)
 			error_exit(2);
 		i++;
 	}
+
+	//validate check
+	if (game->no_path == NULL || game->so_path == NULL \
+		|| game->we_path == NULL || game->ea_path == NULL)
+		error_exit(2);
+
+	if (game->ceil < 0 || game->floor < 0)
+		error_exit(2);
+		
 	read_map(temp, game);
 	xpm_file_to_image_texture(game);
 	get_data_addr_texture(game);

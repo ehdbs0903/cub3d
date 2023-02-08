@@ -32,6 +32,7 @@
 # define HEIGHT		1080
 # define TWIDTH		64
 # define THEIGHT	64
+# define MAX_SIZE	1000000
 
 typedef struct	s_img
 {

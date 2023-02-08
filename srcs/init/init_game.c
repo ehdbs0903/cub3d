@@ -17,6 +17,8 @@ void	init_game(int ac, char *av[], t_game *game, t_img *img)
 	ft_memset(game, 0, sizeof(t_game));
 	ft_memset(img, 0, sizeof(t_img));
 	game->image = img;
+	game->ceil = -1;
+	game->floor = -1;
 	game->movespeed = 0.101;
 	game->rotspeed = 0.0505;
 	game->mlx = mlx_init();
