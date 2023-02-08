@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/05 16:57:41 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/08 12:01:39 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ typedef struct s_game
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	void		*floor;
-	void		*ceil;
+	int			floor;
+	int			ceil;
 	double		movespeed;
 	double		rotspeed;
 	t_player	player;
@@ -96,7 +96,7 @@ void	init_game(int ac, char *av[], t_game *game, t_img *img);
 void	check_file(int ac, char **av, t_game *game);
 void	check_argument(int ac, char **av);
 
-void	init_element(char *buff, t_game *game);
+void	init_element(char **temp, t_game *game);
 void	init_texture(t_game *game, char *line);
 int		check_texture(char *line, char **tmp);
 

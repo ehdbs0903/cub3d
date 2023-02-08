@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:39:00 by sanghan           #+#    #+#             */
-/*   Updated: 2023/02/05 19:35:09 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/08 13:28:19 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void verLine (t_game *game, int x, int y1, int y2, int color)
 
 int raycasting(t_game *game)
 {
-    game->image->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-    if (game->image->img == NULL)
-        exit(1);
     game->image->data = (int *)mlx_get_data_addr(game->image->img, &(game->image->bpp), \
         &(game->image->line_len), &(game->image->endian));
 
@@ -38,18 +35,23 @@ int raycasting(t_game *game)
     while (x < WIDTH)
     {
         double cameraX = (2 * x / (double)(WIDTH)) - 1;
-
-        double rayDirectionX = game->player.dir_x + game->plane_x * cameraX;
-        double rayDirectionY = game->player.dir_y + game->plane_y * cameraX;
-
-        int mapX = (int)(game->player.x);
-        int mapY = (int)(game->player.y);
+		
+		double rayDirectionX = game->player.dir_x + game->plane_x * cameraX;
+		double rayDirectionY = game->player.dir_y + game->plane_y * cameraX;
+		
+		int mapX = (int)(game->player.x);
+		int mapY = (int)(game->player.y);
 
         double sideDistX;
         double sideDistY;
 
-        double deltaDistX = fabs(1 / rayDirectionX);
-        double deltaDistY = fabs(1 / rayDirectionY);
+        double deltaDistX;
+        if (rayDirectionX != 0)
+            deltaDistX = fabs(1 / rayDirectionX);
+        double deltaDistY;
+        if (rayDirectionY != 0)
+            deltaDistY = fabs(1 / rayDirectionY);
+
         double perpWallDist;
 
         int stepX;
@@ -79,6 +81,8 @@ int raycasting(t_game *game)
             sideDistY = (mapY + 1.0 - game->player.y) * deltaDistY;
         }
 
+        mapX = game->player.x;
+        mapY = game->player.y;
         while (hit == 0)
         {
             if (sideDistX < sideDistY)
@@ -142,7 +146,7 @@ int raycasting(t_game *game)
             drawStart = 0;
         int drawEnd = (lineHeight / 2) + (HEIGHT / 2);
         if (drawEnd >= HEIGHT)
-            drawEnd = HEIGHT - 1;
+            drawEnd = HEIGHT;
 
         double step;
         double texture_pos;
@@ -154,29 +158,25 @@ int raycasting(t_game *game)
         int	y;
         int	pixel;
 
-        y = drawStart;
-        while (y < drawEnd)
+        y = 0;
+		while (y < HEIGHT)
         {
             pixel = (y * game->image->line_len / 4) + x;
+			if (y < drawStart)
+				game->image->data[pixel] = game->ceil;
+			else if (y < drawEnd)
+			{
             textureY = (int)texture_pos \
                 & (texture_img.line_len / 4 - 1);
             game->image->data[pixel] = \
                 texture_img.data[textureY * texture_img.line_len / 4 + \
                 textureX];
             texture_pos += step;
-            y++;
+			}
+			else
+				game->image->data[pixel] = game->floor;
+			y++;
         }
-
-        /*
-        int color;
-        if (game->map[mapY][mapX] == '1')
-            color = 0xFFFFFF;
-
-        if (side == 1)
-            color = color / 2;
-
-        verLine(game, x, drawStart, drawEnd, color);
-        */
         x++;
     }
     mlx_put_image_to_window(game->mlx, game->win, game->image->img, 0, 0);

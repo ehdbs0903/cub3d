@@ -45,13 +45,11 @@ static void	get_data_addr_texture(t_game *game)
 		&(game->img_ea.line_len), &(game->img_ea.endian));
 }
 
-void	init_element(char *buff, t_game *game)
+void	init_element(char **temp, t_game *game)
 {
-	char	**temp;
 	int		len;
 	int		i;
 
-	temp = ft_split(buff, '\n');
 	len = ft_strlen_2d(temp);
 	if (len <= 6)
 		error_exit(2);
@@ -69,7 +67,6 @@ void	init_element(char *buff, t_game *game)
 	}
 	xpm_file_to_image_texture(game);
 	get_data_addr_texture(game);
-	read_map(temp, game);
 	free_2d_array(temp);
 }
 
@@ -78,10 +75,7 @@ void	init_element(char *buff, t_game *game)
 void	init_texture(t_game *game, char *line)
 {
 	char	*tmp;
-	// int		width;
-	// int		height;
 
-	printf("line : %s\n", line);
 	if (line[0] == 'N')
 	{
 		if (check_texture(line, &tmp))
