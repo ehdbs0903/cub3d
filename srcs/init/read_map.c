@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:52:43 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/05 17:14:16 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/08 20:32:26 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,26 @@ void	init_player(char c, int x, int y, t_game *game)
 	}
 }
 
- void	init_dir(char dir, t_game *game)
- {
- 	if (dir == 'N')
- 	{
- 		game->player.dir_y = -1;
- 		game->plane_x = 0.66;
- 	}
- 	else if (dir == 'S')
- 	{
- 		game->player.dir_y = 1;
- 		game->plane_x = -0.66;
- 	}
- 	else if (dir == 'W')
- 	{
- 		game->player.dir_x = -1;
- 		game->plane_y = 0.66;
- 	}
- 	else if (dir == 'E')
- 	{
- 		game->player.dir_x = 1;
- 		game->plane_y = -0.66;
- 	}
- }
+void	init_dir(char dir, t_game *game)
+{
+	if (dir == 'N')
+	{
+		game->player.dir_y = -1;
+		game->plane_x = 0.66;
+	}
+	else if (dir == 'S')
+	{
+		game->player.dir_y = 1;
+		game->plane_x = -0.66;
+	}
+	else if (dir == 'W')
+	{
+		game->player.dir_x = -1;
+		game->plane_y = 0.66;
+	}
+	else if (dir == 'E')
+	{
+		game->player.dir_x = 1;
+		game->plane_y = -0.66;
+	}
+}

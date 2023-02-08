@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:34:16 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/08 12:55:15 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/08 20:40:17 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_rgb(t_game *game, char *line)
 	else if (c == 'C')
 	{
 		game->ceil = (ft_atoi(temp[0]) << 16 \
-					 | ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
+				| ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
 	}
 	free_2d_array(temp);
 }
