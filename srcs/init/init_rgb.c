@@ -6,7 +6,7 @@
 /*   By: doykim <doykim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:34:16 by doykim            #+#    #+#             */
-/*   Updated: 2023/01/25 21:06:09 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/08 12:55:15 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	init_rgb(t_game *game, char *line)
 	check_rgb_num(temp);
 	if (c == 'F')
 	{
-		game->floor = make_rgb_img(game, ft_atoi(temp[0]) << 16 \
+		game->floor = (ft_atoi(temp[0]) << 16 \
 				| ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
 	}
 	else if (c == 'C')
 	{
-		game->ceil = make_rgb_img(game, ft_atoi(temp[0]) << 16 \
+		game->ceil = (ft_atoi(temp[0]) << 16 \
 					 | ft_atoi(temp[1]) << 8 | ft_atoi(temp[2]));
 	}
 	free_2d_array(temp);

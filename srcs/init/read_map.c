@@ -28,6 +28,7 @@ void	read_map(char **temp, t_game *game)
 		j++;
 	}
 	game->map[j] = NULL;
+	printf("%s\n", temp[i]);
 	check_map(game->map, game);
 }
 
@@ -42,6 +43,7 @@ void	check_map(char **temp, t_game *game)
 		j = -1;
 		while (temp[i][++j])
 		{
+			printf("%c ", temp[i][j]);
 			if (temp[i][j] == '0')
 			{
 				if (i == 0 || j == 0)
@@ -61,6 +63,7 @@ void	check_map(char **temp, t_game *game)
 
 void	init_player(char c, int x, int y, t_game *game)
 {
+	printf("%c\n", c);
 	if (game->p_flag)
 		error_exit(3);
 	else
@@ -68,8 +71,8 @@ void	init_player(char c, int x, int y, t_game *game)
 		game->p_flag = 1;
 		if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		{
-			game->player.x = x;
-			game->player.y = y;
+			game->player.x = x + 0.5;
+			game->player.y = y + 0.5;
 			init_dir(c, game);
 		}
 		else
