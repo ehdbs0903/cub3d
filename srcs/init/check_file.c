@@ -15,6 +15,7 @@
 void	check_file(int ac, char **av, t_game *game)
 {
 	char	buff[MAX_SIZE];
+	char	**temp;
 	int		fd;
 
 	check_argument(ac, av);
@@ -22,7 +23,9 @@ void	check_file(int ac, char **av, t_game *game)
 	if (fd == -1)
 		error_exit(1);
 	read(fd, buff, MAX_SIZE);
-	init_element(buff, game);
+	temp = ft_split(buff, '\n');
+	init_element(temp, game);
+	free_2d_array(temp);
 	close(fd);
 }
 

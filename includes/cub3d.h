@@ -116,7 +116,7 @@ void	init_game(int ac, char *av[], t_game *game, t_img *img);
 void	check_file(int ac, char **av, t_game *game);
 void	check_argument(int ac, char **av);
 
-void	init_element(char *buff, t_game *game);
+void	init_element(char **temp, t_game *game);
 void	init_texture(t_game *game, char *line);
 int		check_texture(char *line, char **tmp);
 
@@ -143,4 +143,14 @@ void	free_2d_array(char **str);
 void	print_2d(char **arr);
 
 int		raycasting(t_game *game);
+
+void    draw_img(t_game *game, t_ray *ray, t_img *texture_img, int x);
+void    calculate_line(t_game *game, t_ray *ray, t_img *texture_img);
+void    set_wall(t_game *game, t_ray *ray, int x);
+void    calculate_perp_wall_dist(t_game *game, t_ray *ray);
+void    dda(t_game *game, t_ray *ray);
+void    set_ray_values2(t_game *game, t_ray *ray);
+void    set_ray_values(t_game *game, t_ray *ray, int x);
+
+
 #endif

@@ -46,14 +46,11 @@ static void	get_data_addr_texture(t_game *game)
 		&(game->img_ea.line_len), &(game->img_ea.endian));
 }
 
-void	init_element(char *buff, t_game *game)
+void	init_element(char **temp, t_game *game)
 {
 	static int	i = -1;
 	int			len;
-	char		**temp;
 
-	temp = ft_split(buff, '\n');
-	print_2d(temp);
 	len = ft_strlen_2d(temp);
 	if (len <= 6)
 		error_exit(2);
@@ -75,7 +72,6 @@ void	init_element(char *buff, t_game *game)
 	read_map(temp, game);
 	xpm_file_to_image_texture(game);
 	get_data_addr_texture(game);
-	free_2d_array(temp);
 }
 
 void	init_texture(t_game *game, char *line)
