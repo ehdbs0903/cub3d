@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:32:29 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/08 12:01:39 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/08 20:50:49 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,27 @@ typedef struct s_rgb
 
 typedef struct s_ray
 {
-
-
+	double	cameraX;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	double	wall_x;
+	int		drawStart;
+	int		drawEnd;
+	int		texture_x;
+	int		texture_y;
+	double	step;
+	double	texture_pos;
 }	t_ray;
 
 typedef struct s_game
