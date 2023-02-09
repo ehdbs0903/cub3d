@@ -12,11 +12,6 @@
 
 #include "cub3d.h"
 
-void	check_leak(void)
-{
-	system("leaks cub3D");
-}
-
 static int	on_click(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
@@ -28,7 +23,6 @@ int	main(int ac, char *av[])
 	t_game	game;
 	t_img	img;
 
-	atexit(check_leak);
 	init_game(ac, av, &game, &img);
 	game.image->img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	if (game.image->img == NULL)
