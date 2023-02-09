@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 12:52:43 by doykim            #+#    #+#             */
-/*   Updated: 2023/02/08 20:32:26 by doykim           ###   ########.fr       */
+/*   Updated: 2023/02/09 13:18:18 by sanghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	init_dir(char dir, t_game *game)
 	else if (dir == 'W')
 	{
 		game->player.dir_x = -1;
-		game->plane_y = 0.66;
+		game->plane_y = -0.66;
 	}
 	else if (dir == 'E')
 	{
 		game->player.dir_x = 1;
-		game->plane_y = -0.66;
+		game->plane_y = 0.66;
 	}
 }
