@@ -14,7 +14,13 @@
 
 void	check_leak(void)
 {
-	system("leaks cub3d");
+	system("leaks cub3D");
+}
+
+static int	on_click(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
 }
 
 int	main(int ac, char *av[])
@@ -28,13 +34,8 @@ int	main(int ac, char *av[])
 	if (game.image->img == NULL)
 		exit(1);
 	mlx_hook(game.win, 2, 0, key_press, &game);
-	main_loop(&game);
+	mlx_hook(game.win, 17, 0, on_click, &game);
+	raycasting(&game);
 	mlx_loop(game.mlx);
-	free_2d_array(game.map);
-	free(game.no_path);
-	free(game.so_path);
-	free(game.we_path);
-	free(game.ea_path);
-	mlx_destroy_window(game.mlx, game.win);
 	return (0);
 }

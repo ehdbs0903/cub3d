@@ -34,7 +34,7 @@
 # define THEIGHT	64
 # define MAX_SIZE	1000000
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	int		*data;
@@ -129,28 +129,23 @@ void	check_map(char **temp, t_game *game);
 void	init_player(char c, int x, int y, t_game *game);
 void	init_dir(char dir, t_game *game);
 
-//loop
-void	main_loop(t_game *game);
-
 //key
 int		key_press(int key, t_game *game);
-//void	move(t_game *game, int dx, int dy);
 int		x_exit(int n);
 
 //utils
 void	error_exit(int n);
 void	free_2d_array(char **str);
-void	print_2d(char **arr);
 
+//raycast
 int		raycasting(t_game *game);
+void	calculate_perp_wall_dist(t_game *game, t_ray *ray);
+void	dda(t_game *game, t_ray *ray);
+void	set_ray_values2(t_game *game, t_ray *ray);
+void	set_ray_values(t_game *game, t_ray *ray, int x);
 
-void    draw_img(t_game *game, t_ray *ray, t_img *texture_img, int x);
-void    calculate_line(t_game *game, t_ray *ray, t_img *texture_img);
-void    set_wall(t_game *game, t_ray *ray, int x);
-void    calculate_perp_wall_dist(t_game *game, t_ray *ray);
-void    dda(t_game *game, t_ray *ray);
-void    set_ray_values2(t_game *game, t_ray *ray);
-void    set_ray_values(t_game *game, t_ray *ray, int x);
-
+void	draw_img(t_game *game, t_ray *ray, t_img *texture_img, int x);
+void	calculate_line(t_game *game, t_ray *ray, t_img *texture_img);
+void	set_wall(t_game *game, t_ray *ray, int x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sanghan <sanghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:39:00 by sanghan           #+#    #+#             */
-/*   Updated: 2023/02/09 13:00:47 by sanghan          ###   ########.fr       */
+/*   Updated: 2023/02/09 13:20:38 by doykim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,3 @@ void	calculate_perp_wall_dist(t_game *game, t_ray *ray)
 		ray->perp_wall_dist = (ray->map_y - game->player.y \
 				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
 }
-

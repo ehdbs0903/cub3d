@@ -70,7 +70,10 @@ int	key_press(int key, t_game *game)
 	else if (key == KEY_RIGHT)
 		key_lr(game, 1);
 	else if (key == KEY_ESC)
+	{
+		mlx_destroy_window(game->mlx, game->win);
 		exit(0);
-	main_loop(game);
+	}
+	raycasting(game);
 	return (0);
 }
