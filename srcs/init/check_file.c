@@ -38,7 +38,7 @@ void	check_argument(int ac, char **av)
 		error_exit(1);
 	len = ft_strlen(av[1]);
 	i = len - 4;
-	if (i <= 5)
+	if (i <= 0)
 		error_exit(1);
 	if (!ft_strnstr(av[1] + i, ".cub\0", 5))
 		error_exit(1);
